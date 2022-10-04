@@ -1,0 +1,6 @@
+flasgger==0.9.5
+Flask==2.1.2
+Flask_HTTPAuth==4.7.0
+flask_restx==0.5.1
+Pillow==9.2.0
+Werkzeug==2.1.2
