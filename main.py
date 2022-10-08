@@ -3,15 +3,14 @@ from flask import Flask, request, send_file
 from flasgger import Swagger, LazyJSONEncoder
 from flask_restx import Api, Resource
 from werkzeug.datastructures import FileStorage
-from flask_httpauth import HTTPBasicAuth
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import check_password_hash
 from Services.PrimeTestService import ValidateNumber
 from Services.TimeService import GetTime
 from Services.PictureInversionService import InvertImage
+from Services.AuthorizationService import users, auth
 
 app = Flask(__name__)
 api = Api(app)
-auth = HTTPBasicAuth()
 app.json_encoder = LazyJSONEncoder
 upload_parser = api.parser()
 upload_parser.add_argument('file',
@@ -20,10 +19,6 @@ upload_parser.add_argument('file',
 
 swagger = Swagger(app)
 ns = api.namespace('', description='SUPER APLIKACJA')
-
-users = {
-    "user": generate_password_hash("password"),
-}
 
 @auth.verify_password
 def verify_password(username, password):
