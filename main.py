@@ -25,7 +25,7 @@ def verify_password(username, password):
     if username in users and check_password_hash(users.get(username), password):
         return username
 
-@ns.route('/prime-test/<int:number>')
+@ns.route('/prime/<int:number>')
 @ns.param('number', 'Number to check')
 class PrimeTest(Resource):
     def get(self, number):
